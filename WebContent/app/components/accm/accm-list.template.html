@@ -1,0 +1,30 @@
+<div class="row">
+
+	<div class="col-sm-6 col-md-4" ng-repeat="phone in $ctrl.phones">
+		<div class="thumbnail">
+			<img src="assets/img/gem-01.gif" alt="...">
+			<div class="caption">
+				<h3>{{phone.lastName}}, {{phone.firstName}}</h3>
+
+				<table class="table table-striped">
+					<tr>
+						<td>Email:</td>
+						<td>{{phone.email}}</td>
+					</tr>
+					<tr>
+						<td>Date of birth:</td>
+						<td>{{phone.dateOfBirth}}</td>
+					</tr>
+				</table>
+
+				<p>
+					<a class="btn btn-default" href="#!/phones/{{phone.id}}"
+						role="button">View details {{phone.id}} &raquo;</a>
+				</p>
+			</div>
+		</div>
+	</div>
+
+
+
+</div>

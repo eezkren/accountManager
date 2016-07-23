@@ -1,0 +1,66 @@
+<!-- 
+<div id="details" class="span7">
+    <h3>{{$ctrl.phone.firstName}} {{$ctrl.phone.lastName}}</h3>
+    <h4>{{$ctrl.phone.title}}</h4>
+    <br>
+    <table class="table table-striped">
+        <tr>
+            <td>Office Phone:</td>
+            <td><i class="icon-home"></i> {{$ctrl.phone.officePhone}}</td>
+        </tr>
+        <tr>
+            <td>Cell Phone:</td>
+            <td><i class="icon-headphones"></i> {{$ctrl.phone.cellPhone}}</td>
+        </tr>
+        <tr>
+            <td>Email:</td>
+            <td><i class="icon-envelope"></i> <a
+                    href="mailto:{{$ctrl.phone.email}}"> {{$ctrl.phone.email}}</a></td>
+        </tr>
+        <tr>
+            <td>Twitter:</td>
+            <td><i class="icon-retweet"></i> <a href="">{{$ctrl.phone.twitterId}}</a></td>
+        </tr>
+    </table>
+
+    <div class="alert alert-warning">
+        <h4 class="alert-heading">Warning</h4>
+        The phone numbers, email addresses, and Twitter handlers are fake.
+    </div>
+</div>
+
+ -->
+
+
+
+
+<form name="reviewForm" ng-submit="$ctrl.addReview($ctrl.phone)">
+	<fieldset class="form-group">
+		<div class="form-group">
+			<label for="firstName">First Name</label>
+			<input id="firstName" ng-model="$ctrl.phone.firstName"
+				class="form-control" placeholder="Ivan" title="First Name" />
+		</div>
+		<div class="form-group">
+			<label for="lastName">Last Name</label>
+			<input id="lastName" ng-model="$ctrl.phone.lastName"
+				class="form-control" placeholder="Ivanov" title="Last Name" />
+		</div>
+		<div class="form-group">
+			<label for="email">email</label>
+			<input id="email" ng-model="$ctrl.phone.email" type="email"
+				class="form-control" placeholder="ivan@example.com" title="Email" />
+		</div>
+		<div class="form-group">
+			<label for="dateOfBirth">Date Of Birth</label>
+			<input id="dateOfBirth" ng-model="$ctrl.phone.dateOfBirth"
+				class="form-control" placeholder="01-01-1995" title="dateOfBirth" />
+		</div>
+		<div class="form-group">
+			<input type="submit" class="btn btn-primary pull-right" value="Save" />
+		</div>
+	</fieldset>
+</form>
+
+
+

@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en" ng-app="phonecatApp">
+<head>
+<meta charset="utf-8">
+<title>Google Phone Gallery</title>
+
+<link rel="stylesheet" type="text/css"
+	href="assets/lib/bootstrap-3.3.6-dist/css/bootstrap.min.css" />
+
+<link rel="stylesheet" type="text/css" href="assets/css/application.css" />
+<link rel="stylesheet" type="text/css"
+	href="assets/css/app.animations.css" />
+
+
+
+
+<script type="text/javascript"
+	src="assets/lib/jQuery-3.0.0/jquery-3.0.0.min.js"></script>
+
+<script type="text/javascript"
+	src="assets/lib/angular-1.5.7/angular.min.js"></script>
+
+<script type="text/javascript"
+	src="assets/lib/angular-1.5.7/angular-animate.min.js"></script>
+
+<script type="text/javascript"
+	src="assets/lib/angular-1.5.7/angular-resource.min.js"></script>
+
+<script type="text/javascript"
+	src="assets/lib/angular-1.5.7/angular-route.min.js"></script>
+
+<script type="text/javascript" src="app/app.module-phone.js"></script>
+
+<script type="text/javascript" src="app/app.routes-phone.js"></script>
+
+<script type="text/javascript" src="app/app.animations.js"></script>
+
+<script type="text/javascript" src="app/shared/core.module-phone.js"></script>
+
+<script type="text/javascript"
+	src="app/shared/checkmark/checkmark.filter.js"></script>
+
+<script type="text/javascript" src="app/shared/phone/phone.module.js"></script>
+
+<script type="text/javascript" src="app/shared/phone/phone.service.js"></script>
+
+<script type="text/javascript"
+	src="app/components/phone-list/phone-list.module.js"></script>
+`
+<script type="text/javascript"
+	src="app/components/phone-list/phone-list.component.js"></script>
+
+<script type="text/javascript"
+	src="app/components/phone-list/phone-detail.module.js"></script>
+
+<script type="text/javascript"
+	src="app/components/phone-list/phone-detail.component.js"></script>
+
+
+
+
+</head>
+<body>
+
+	<!-- Use a custom component to render a list of phones -->
+	<div class="view-container">
+		<div ng-view class="view-frame"></div>
+	</div>
+
+</body>
+</html>
