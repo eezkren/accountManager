@@ -2,27 +2,32 @@
 
 // Register `phoneDetail` component, along with its associated controller and
 // template
-angular.module('phoneEdit').component(
-		'phoneEdit',
-		{
-			templateUrl : 'app/components/accm/accm-edit.template.html',
-			controller : [ '$routeParams', 'Phone',
-					function PhoneEditController($routeParams, Phone) {
+angular.module('phoneEdit').component('phoneEdit', {
+	templateUrl : 'app/components/accm/accm-edit.template.html',
+	controller : [ '$routeParams', 'Phone',
 
-						var self = this;
-						self.phone = Phone.get({
-							phoneId : $routeParams.phoneId
-						}, function(phone) {
-						});
+	function PhoneEditController($routeParams, Phone) {
 
-						this.addReview = function(Phone) {
-							alert(Phone)
-						};
+		getAccount(this);
 
-					}, function PhoneNewController($routeParams) {
+		function getAccount(ctrl) {
+			Phone.getAccount({
+				phoneId : $routeParams.phoneId
+			}).then(function(response) {
+				ctrl.phone = response.data;
+			}, function(error) {
+				console.log("ERROR PhoneEditController")
+				// $scope.status = 'Unable to load customer data: '
+				// + error.message;
+			});
+		}
 
-						var self = this;
-						self.phone = {};
-
-					} ]
-		});
+	}
+	// , function PhoneNewController($routeParams) {
+	//
+	// var self = this;
+	// self.phone = {};
+	//
+	// }
+	]
+});

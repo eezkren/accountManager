@@ -1,18 +1,22 @@
 'use strict';
 
-// Register `phoneDetail` component, along with its associated controller and
-// template
 angular.module('phoneDetail').component(
 		'phoneDetail',
 		{
 			templateUrl : 'app/components/accm/accm-detail.template.html',
 			controller : [ '$routeParams', 'Phone',
 					function PhoneDetailController($routeParams, Phone) {
-						var self = this;
-						self.phone = Phone.get({
-							phoneId : $routeParams.phoneId
-						}, function(phone) {
-						});
+						getAccount(this);
+
+						function getAccount(ctrl) {
+							Phone.getAccount({
+								phoneId : $routeParams.phoneId
+							}).then(function(response) {
+								ctrl.phone = response.data;
+							}, function(error) {
+								console.log("ERROR PhoneDetailController")
+							});
+						}
 
 					} ]
 		});
