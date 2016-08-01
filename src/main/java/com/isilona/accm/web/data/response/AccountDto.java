@@ -4,7 +4,7 @@ package com.isilona.accm.web.data.response;
  * @author iivanov
  *
  */
-public class AccountDTO {
+public class AccountDto {
 
 	private Long id;
 

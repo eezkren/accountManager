@@ -1,7 +1,6 @@
 package com.isilona.accm.web.service;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +12,8 @@ import org.springframework.stereotype.Service;
 
 import com.isilona.accm.db.model.Account;
 import com.isilona.accm.db.repository.AccountRepository;
-import com.isilona.accm.web.data.response.AccountDTO;
+import com.isilona.accm.web.data.mapping.AccountMapper;
+import com.isilona.accm.web.data.response.AccountDto;
 
 /**
  * Account service handling account creation and manipulations
@@ -24,131 +24,139 @@ import com.isilona.accm.web.data.response.AccountDTO;
 @Service
 public class AccountServiceWeb {
 
-	@Autowired
-	private AccountRepository accountRepository;
+    @Autowired
+    private AccountMapper mapper;
 
-	@Autowired
-	ApplicationEventPublisher eventPublisher;
+    @Autowired
+    private AccountRepository accountRepository;
 
-	/**
-	 * Get list with all {@link Account}s
-	 * 
-	 * @param accountToCreate
-	 * @return status of the request
-	 */
+    @Autowired
+    ApplicationEventPublisher eventPublisher;
 
-	// ALL
-	public List<AccountDTO> getAccounts() {
+    /**
+     * Get list with all {@link Account}s
+     * 
+     * @param accountToCreate
+     * @return status of the request
+     */
 
-		List<Account> accounts = accountRepository.findAll();
-		List<AccountDTO> usersResponse = new ArrayList<AccountDTO>(accounts.size());
+    // ALL
+    public List<AccountDto> getAccounts() {
 
-		for (Account account : accounts) {
-			AccountDTO userDTO = object2dto(account);
-			usersResponse.add(userDTO);
-		}
+	List<Account> accounts = accountRepository.findAll();
+	List<AccountDto> usersResponse = new ArrayList<AccountDto>(accounts.size());
 
-		return usersResponse;
+	for (Account account : accounts) {
+	    // AccountDto userDTO = object2dto(account);
+	    AccountDto userDTO = mapper.accountToAccountDto(account);
+	    usersResponse.add(userDTO);
 	}
 
-	/**
-	 * Find one {@link Account} by a given id
-	 * 
-	 * @param id
-	 * @return
-	 */
+	return usersResponse;
+    }
 
-	// FIND
-	public AccountDTO getAccountById(Long id) {
+    /**
+     * Find one {@link Account} by a given id
+     * 
+     * @param id
+     * @return
+     */
 
-		Account account = accountRepository.findOne(id);
-		AccountDTO responseDTO = object2dto(account);
+    // FIND
+    public AccountDto getAccountById(Long id) {
 
-		return responseDTO;
-	}
+	Account account = accountRepository.findOne(id);
+	// AccountDto responseDTO = object2dto(account);
+	AccountDto responseDTO = mapper.accountToAccountDto(account);
 
-	/**
-	 * delete one {@link Account} by a given id
-	 * 
-	 * @param id
-	 * @return
-	 */
+	return responseDTO;
+    }
 
-	// DELETE
-	public void deleteAccountById(Long id) {
+    /**
+     * delete one {@link Account} by a given id
+     * 
+     * @param id
+     * @return
+     */
 
-		accountRepository.delete(id);
+    // DELETE
+    public void deleteAccountById(Long id) {
 
-	}
+	accountRepository.delete(id);
 
-	/**
-	 * delete one {@link Account} by a given id
-	 * 
-	 * @param id
-	 * @return
-	 */
-	public Account saveAccount(AccountDTO accountDTO) {
+    }
 
-		Account toSave = dto2object(accountDTO);
+    /**
+     * delete one {@link Account} by a given id
+     * 
+     * @param id
+     * @return
+     */
+    public Account saveAccount(AccountDto accountDTO) {
 
-		Account newAcc = accountRepository.save(toSave);
+	// Account toSave = dto2object(accountDTO);
 
-		return newAcc;
-	}
+	Account toSave = mapper.accountDtoToAccount(accountDTO);
 
-	/**
-	 * 
-	 * Transformation method - Creates {@link AccountDTO} from given
-	 * {@link Account}
-	 * 
-	 * @param account
-	 * @return
-	 */
-	private AccountDTO object2dto(Account account) {
+	Account newAcc = accountRepository.save(toSave);
 
-		AccountDTO result = new AccountDTO();
+	return newAcc;
+    }
 
-		result.setId(account.getId());
-		result.setFirstName(account.getFirstName());
-		result.setLastName(account.getLastName());
-		result.setEmail(account.getEmail());
+    /**
+     * 
+     * Transformation method - Creates {@link AccountDto} from given
+     * {@link Account}
+     * 
+     * @param account
+     * @return
+     */
+    // private AccountDto object2dto(Account account) {
+    //
+    // AccountDto result = new AccountDto();
+    //
+    // result.setId(account.getId());
+    // result.setFirstName(account.getFirstName());
+    // result.setLastName(account.getLastName());
+    // result.setEmail(account.getEmail());
+    //
+    // if (null == account.getDateOfBirth()) {
+    // // result.setDateOfBirth("");
+    // } else {
+    // // result.setDateOfBirth(account.getDateOfBirth().toString());
+    // }
+    //
+    // return result;
+    //
+    // }
 
-		if (null == account.getDateOfBirth()) {
-			// result.setDateOfBirth("");
-		} else {
-			// result.setDateOfBirth(account.getDateOfBirth().toString());
-		}
-
-		return result;
-
-	}
-
-	/**
-	 * 
-	 * Transformation method - Creates {@link Account} from given
-	 * {@link AccountDTO}
-	 * 
-	 * @param dto
-	 * @return
-	 */
-	private Account dto2object(AccountDTO dto) {
-
-		Account result = new Account();
-
-		result.setId(dto.getId());
-		result.setFirstName(dto.getFirstName());
-		result.setLastName(dto.getLastName());
-		result.setEmail(dto.getEmail());
-
-		if ("".equals(dto.getDateOfBirth())) {
-			result.setDateOfBirth(null);
-		} else {
-			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
-			result.setDateOfBirth(LocalDate.parse(dto.getDateOfBirth(), formatter));
-		}
-
-		return result;
-
-	}
+    /**
+     * 
+     * Transformation method - Creates {@link Account} from given
+     * {@link AccountDto}
+     * 
+     * @param dto
+     * @return
+     */
+    // private Account dto2object(AccountDto dto) {
+    //
+    // Account result = new Account();
+    //
+    // result.setId(dto.getId());
+    // result.setFirstName(dto.getFirstName());
+    // result.setLastName(dto.getLastName());
+    // result.setEmail(dto.getEmail());
+    //
+    // if ("".equals(dto.getDateOfBirth())) {
+    // result.setDateOfBirth(null);
+    // } else {
+    // DateTimeFormatter formatter =
+    // DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+    // result.setDateOfBirth(LocalDate.parse(dto.getDateOfBirth(), formatter));
+    // }
+    //
+    // return result;
+    //
+    // }
 
 }

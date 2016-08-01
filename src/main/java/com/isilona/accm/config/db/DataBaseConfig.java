@@ -14,15 +14,15 @@ import org.springframework.dao.annotation.PersistenceExceptionTranslationPostPro
 public class DataBaseConfig {
     /**
      * 
-     * When using JPA, the standard exceptions are somewhat out of keeping with Spring’s exception
-     * model. Spring provides support for automatically translating these exceptions into Spring’s
-     * DataAccessException hierarchy.
+     * When using JPA, the standard exceptions are somewhat out of keeping with
+     * Spring's exception model. Spring provides support for automatically
+     * translating these exceptions into Spring's DataAccessException hierarchy.
      * 
      * @return {@link PersistenceExceptionTranslationPostProcessor}
      */
     @Bean
     public PersistenceExceptionTranslationPostProcessor exceptionTranslation() {
-        return new PersistenceExceptionTranslationPostProcessor();
+	return new PersistenceExceptionTranslationPostProcessor();
     }
 
 }

@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.WebRequest;
 
 import com.isilona.accm.db.model.Account;
-import com.isilona.accm.web.data.response.AccountDTO;
+import com.isilona.accm.web.data.response.AccountDto;
 import com.isilona.accm.web.service.AccountServiceWeb;
 
 @RestController
@@ -31,14 +31,14 @@ public class AccountControllerWeb {
 
     // ALL
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public List<AccountDTO> getAccounts() {
+    public List<AccountDto> getAccounts() {
         LOGGER.info("GET /account /list");
         return userServiceWeb.getAccounts();
     }
 
     // FIND
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public AccountDTO getAccountById(@PathVariable("id") Long id) {
+    public AccountDto getAccountById(@PathVariable("id") Long id) {
         LOGGER.info("GET /account /{id}: " + id);
         return userServiceWeb.getAccountById(id);
     }
@@ -55,7 +55,7 @@ public class AccountControllerWeb {
     // UPDATE
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     @ResponseStatus(HttpStatus.OK)
-    public Account saveAccountById(@RequestBody AccountDTO accountDTO, @PathVariable Long id) {
+    public Account saveAccountById(@RequestBody AccountDto accountDTO, @PathVariable Long id) {
         LOGGER.info("UPDATE /account /{id}: " + id);
 
         Account updatedAccount = userServiceWeb.saveAccount(accountDTO);
@@ -65,7 +65,7 @@ public class AccountControllerWeb {
 
     // NEW
     @RequestMapping(value = "/new", method = RequestMethod.POST)
-    public Account registerAccount(@Valid @RequestBody AccountDTO newAccount, WebRequest request) {
+    public Account registerAccount(@Valid @RequestBody AccountDto newAccount, WebRequest request) {
         LOGGER.info("POST /account/register");
 
         Account savedAccount = userServiceWeb.saveAccount(newAccount);
