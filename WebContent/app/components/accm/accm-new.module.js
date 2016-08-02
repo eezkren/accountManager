@@ -2,4 +2,4 @@
 
 // Define the `phoneDetail` module
 angular.module('phoneNew', [ 'ngRoute', 'ngMessages', 'ngAnimate',
-		'core.phone', 'ui.bootstrap', 'ngFlash' ]);
+		'core.phone', 'ui.bootstrap', 'ui-notification' ]);

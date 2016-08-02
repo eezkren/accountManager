@@ -6,8 +6,8 @@ angular.module('phoneNew').component(
 		'phoneNew',
 		{
 			templateUrl : 'app/components/accm/accm-new.template.html',
-			controller : [ 'Phone', '$filter', 'Flash',
-					function PhoneNewController(Phone, $filter, Flash) {
+			controller : [ 'Phone', '$filter', 'Notification',
+					function PhoneNewController(Phone, $filter, Notification) {
 
 						var ctrl = this;
 
@@ -29,7 +29,11 @@ angular.module('phoneNew').component(
 						ctrl.success = function success() {
 							ctrl.showSuccess = true;
 							var message = '<strong>Account Created</strong>';
-							Flash.create('success', message);
+
+							Notification.success({
+								message : message,
+								delay : 3000
+							});
 						},
 
 						ctrl.dismissCallback = function dismissCallback() {
