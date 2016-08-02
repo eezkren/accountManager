@@ -13,7 +13,6 @@ angular.module('phoneNew').component(
 
 						ctrl.phone = {};
 						ctrl.popup2 = {}
-						ctrl.showSuccess = false;
 
 						ctrl.addAccount = function addAccount(phone) {
 							Phone.addAccount(phone).then(function(response) {
@@ -27,17 +26,12 @@ angular.module('phoneNew').component(
 						},
 
 						ctrl.success = function success() {
-							ctrl.showSuccess = true;
 							var message = '<strong>Account Created</strong>';
 
 							Notification.success({
 								message : message,
 								delay : 3000
 							});
-						},
-
-						ctrl.dismissCallback = function dismissCallback() {
-							ctrl.showSuccess = false;
 						},
 
 						ctrl.open2 = function open2() {

@@ -1,66 +1,78 @@
-<!-- 
-<div id="details" class="span7">
-    <h3>{{$ctrl.phone.firstName}} {{$ctrl.phone.lastName}}</h3>
-    <h4>{{$ctrl.phone.title}}</h4>
-    <br>
-    <table class="table table-striped">
-        <tr>
-            <td>Office Phone:</td>
-            <td><i class="icon-home"></i> {{$ctrl.phone.officePhone}}</td>
-        </tr>
-        <tr>
-            <td>Cell Phone:</td>
-            <td><i class="icon-headphones"></i> {{$ctrl.phone.cellPhone}}</td>
-        </tr>
-        <tr>
-            <td>Email:</td>
-            <td><i class="icon-envelope"></i> <a
-                    href="mailto:{{$ctrl.phone.email}}"> {{$ctrl.phone.email}}</a></td>
-        </tr>
-        <tr>
-            <td>Twitter:</td>
-            <td><i class="icon-retweet"></i> <a href="">{{$ctrl.phone.twitterId}}</a></td>
-        </tr>
-    </table>
 
-    <div class="alert alert-warning">
-        <h4 class="alert-heading">Warning</h4>
-        The phone numbers, email addresses, and Twitter handlers are fake.
-    </div>
-</div>
-
- -->
+<form name="$ctrl.reviewForm" ng-submit="$ctrl.updateAccount($ctrl.phone)">
 
 
-edit
 
-<form name="reviewForm" ng-submit="$ctrl.addReview($ctrl.phone)">
 	<fieldset class="form-group">
-		<div class="form-group">
-			<label for="firstName">First Name</label>
-			<input id="firstName" ng-model="$ctrl.phone.firstName"
-				class="form-control" placeholder="Ivan" title="First Name" />
+
+		<!-- First Name -->
+		<div class="form-group"
+			ng-class="{ 'has-error': $ctrl.reviewForm.firstName.$touched && $ctrl.reviewForm.firstName.$invalid }">
+			<label class="control-label" for="firstName">First Name</label>
+
+			<input class="form-control" type="text" id="firstName" name="firstName" title="First Name"
+				ng-model="$ctrl.phone.firstName" ng-minlength="2" required />
+
+			<!-- err Msg -->
+			<div class="help-block" ng-messages="$ctrl.reviewForm.firstName.$error"
+				ng-if="$ctrl.reviewForm.firstName.$touched">
+				<p ng-message="minlength">Your First Name is too short.</p>
+				<p ng-message="required">Your First Name is required.</p>
+			</div>
 		</div>
-		<div class="form-group">
-			<label for="lastName">Last Name</label>
-			<input id="lastName" ng-model="$ctrl.phone.lastName"
-				class="form-control" placeholder="Ivanov" title="Last Name" />
+
+
+		<!-- Last Name -->
+		<div class="form-group"
+			ng-class="{ 'has-error': $ctrl.reviewForm.lastName.$touched && $ctrl.reviewForm.lastName.$invalid }">
+			<label class="control-label" for="lastName">Last Name</label>
+
+			<input class="form-control" type="text" id="lastName" name="lastName" title="Last Name"
+				ng-model="$ctrl.phone.lastName" ng-minlength="2" required />
+
+			<!-- err Msg -->
+			<div class="help-block" ng-messages="$ctrl.reviewForm.lastName.$error"
+				ng-if="$ctrl.reviewForm.lastName.$touched">
+				<p ng-message="minlength">Your Last Name is too short.</p>
+				<p ng-message="required">Your Last Name is required.</p>
+			</div>
 		</div>
-		<div class="form-group">
-			<label for="email">email</label>
-			<input id="email" ng-model="$ctrl.phone.email" type="email"
-				class="form-control" placeholder="ivan@example.com" title="Email" />
+
+		<!-- email -->
+		<div class="form-group"
+			ng-class="{ 'has-error': $ctrl.reviewForm.email.$touched && $ctrl.reviewForm.email.$invalid }">
+			<label class="control-label" for="email">email</label>
+
+			<input class="form-control" type="email" id="email" name="email" title="email"
+				ng-model="$ctrl.phone.email"
+				ng-pattern="/^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/" required />
+
+			<!-- err Msg -->
+			<div class="help-block" ng-messages="$ctrl.reviewForm.email.$error"
+				ng-if="$ctrl.reviewForm.email.$touched">
+				<p ng-message="pattern">This needs to be a valid email</p>
+				<p ng-message="required">Your email is required.</p>
+			</div>
 		</div>
-		<div class="form-group">
-			<label for="dateOfBirth">Date Of Birth</label>
-			<input id="dateOfBirth" ng-model="$ctrl.phone.dateOfBirth"
-				class="form-control" placeholder="01-01-2003" title="dateOfBirth" />
+
+		<!-- Date Of Birth -->
+		<div class="form-group"
+			ng-class="{ 'has-error': $ctrl.reviewForm.dateOfBirth.$touched && $ctrl.reviewForm.dateOfBirth.$invalid }">
+			<label class="control-label" for="dateOfBirth">Date Of Birth</label>
+			<p class="input-group">
+				<input class="form-control" placeholder="1995-10-21" type="text" id="dateOfBirth"
+					name="dateOfBirth" title="Date Of Birth" ng-model="$ctrl.phone.dateOfBirth"
+					uib-datepicker-popup is-open="$ctrl.popup2.opened" close-text="Close" />
+				<span class="input-group-btn">
+					<button type="button" class="form-control btn btn-default" ng-click="$ctrl.open2()">
+						<i class="glyphicon glyphicon-calendar"></i>
+					</button>
+				</span>
+			</p>
 		</div>
+
 		<div class="form-group">
 			<input type="submit" class="btn btn-primary pull-right" value="Save" />
 		</div>
 	</fieldset>
 </form>
-
-
-
