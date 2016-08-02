@@ -1,22 +1,17 @@
 <div id="details" class="span7">
-	<h3>{{$ctrl.phone.firstName}} {{$ctrl.phone.lastName}}</h3>
-	<h4>{{$ctrl.phone.title}}</h4>
+	<h3>{{$ctrl.phone.lastName}}, {{$ctrl.phone.firstName}}</h3>
 	<br>
 	<table class="table table-striped">
 		<tr>
 			<td>Email:</td>
-			<td><a href="mailto:{{$ctrl.phone.email}}">
-					{{$ctrl.phone.email}}</a></td>
+			<td><a href="mailto:{{$ctrl.phone.email}}"> {{$ctrl.phone.email}}</a></td>
 		</tr>
 		<tr>
-			<td>Email:</td>
+			<td>Date of birth:</td>
 			<td>{{$ctrl.phone.dateOfBirth}}</td>
 		</tr>
 	</table>
-
-	<div class="alert alert-warning">
-		<h4 class="alert-heading">Warning</h4>
-		The phone numbers, email addresses, and Twitter handlers are fake.
-	</div>
 </div>
-
+<p>
+	<a class="btn btn-primary" href="#!/phones/{{$ctrl.phone.id}}/edit" role="button">Edit</a>
+</p>
