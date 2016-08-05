@@ -1,5 +1,5 @@
 'use strict';
 
-// Define the `phoneDetail` module
-angular.module('phoneNew', [ 'ngRoute', 'ngMessages', 'ngAnimate',
-		'core.phone', 'ui.bootstrap', 'ui-notification' ]);
+// Define the `accountNew` module
+angular.module('accountNew',
+		[ 'ngRoute', 'ngMessages', 'ngAnimate', 'core.account', 'ui.bootstrap', 'ui-notification' ]);

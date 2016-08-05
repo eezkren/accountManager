@@ -1,22 +1,19 @@
 'use strict';
 
-angular.module('phoneDetail').component(
-		'phoneDetail',
-		{
-			templateUrl : 'app/components/accm/accm-detail.template.html',
-			controller : [ '$routeParams', 'Phone',
-					function PhoneDetailController($routeParams, Phone) {
-						getAccount(this);
+angular.module('accountDetails').component('accountDetails', {
+	templateUrl : 'app/components/accm/accm-detail.template.html',
+	controller : [ '$routeParams', 'Account', function AccountDetailsController($routeParams, Account) {
+		getAccount(this);
 
-						function getAccount(ctrl) {
-							Phone.getAccount({
-								phoneId : $routeParams.phoneId
-							}).then(function(response) {
-								ctrl.phone = response.data;
-							}, function(error) {
-								console.log("ERROR PhoneDetailController")
-							});
-						}
+		function getAccount(ctrl) {
+			Account.getAccount({
+				accountId : $routeParams.accountId
+			}).then(function(response) {
+				ctrl.account = response.data;
+			}, function(error) {
+				console.log("ERROR AccountDetailsController -> getAccount()")
+			});
+		}
 
-					} ]
-		});
+	} ]
+});

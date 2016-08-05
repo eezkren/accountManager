@@ -1,37 +1,37 @@
 'use strict';
 
-// Register `phoneDetail` component, along with its associated controller and
+// Register `accountEdit` component, along with its associated controller and
 // template
-angular.module('phoneEdit').component('phoneEdit', {
+angular.module('accountEdit').component('accountEdit', {
 	templateUrl : 'app/components/accm/accm-edit.template.html',
-	controller : [ '$routeParams', 'Phone', 'Notification',
+	controller : [ '$routeParams', 'Account', 'Notification',
 
-	function PhoneEditController($routeParams, Phone, Notification) {
+	function AccountEditController($routeParams, Account, Notification) {
 
 		var ctrl = this;
 
 		getAccount(this);
 
-		ctrl.phone = {};
+		ctrl.account = {};
 		ctrl.datepicker = {}
 
 		function getAccount(ctrl) {
-			Phone.getAccount({
-				phoneId : $routeParams.phoneId
+			Account.getAccount({
+				accountId : $routeParams.accountId
 			}).then(function(response) {
-				ctrl.phone = response.data;
-				ctrl.phone.dateOfBirth = new Date(ctrl.phone.dateOfBirth);
+				ctrl.account = response.data;
+				ctrl.account.dateOfBirth = new Date(ctrl.account.dateOfBirth);
 			}, function(error) {
-				console.log("ERROR PhoneEditController -> getAccount")
+				console.log("ERROR AccountEditController -> getAccount")
 			});
 		}
 
-		ctrl.updateAccount = function updateAccount(phone) {
-			Phone.addAccount(phone).then(function(response) {
-				phone = response.data;
+		ctrl.updateAccount = function updateAccount(account) {
+			Account.addAccount(account).then(function(response) {
+				account = response.data;
 				ctrl.success();
 			}, function(error) {
-				console.log("ERROR PhoneEditController -> updateAccount")
+				console.log("ERROR AccountEditController -> updateAccount")
 			});
 		},
 

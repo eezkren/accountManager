@@ -1,17 +1,17 @@
 <div id="details" class="span7">
-	<h3>{{$ctrl.phone.lastName}}, {{$ctrl.phone.firstName}}</h3>
+	<h3>{{$ctrl.account.lastName}}, {{$ctrl.account.firstName}}</h3>
 	<br>
 	<table class="table table-striped">
 		<tr>
 			<td>Email:</td>
-			<td><a href="mailto:{{$ctrl.phone.email}}"> {{$ctrl.phone.email}}</a></td>
+			<td><a href="mailto:{{$ctrl.account.email}}"> {{$ctrl.account.email}}</a></td>
 		</tr>
 		<tr>
 			<td>Date of birth:</td>
-			<td>{{$ctrl.phone.dateOfBirth}}</td>
+			<td>{{$ctrl.account.dateOfBirth}}</td>
 		</tr>
 	</table>
 </div>
 <p>
-	<a class="btn btn-primary" href="#!/phones/{{$ctrl.phone.id}}/edit" role="button">Edit</a>
+	<a class="btn btn-primary" href="#!/accounts/{{$ctrl.account.id}}/edit" role="button">Edit</a>
 </p>

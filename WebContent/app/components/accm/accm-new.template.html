@@ -1,6 +1,6 @@
 
 
-<form name="$ctrl.reviewForm" ng-submit="$ctrl.addAccount($ctrl.phone)">
+<form name="$ctrl.reviewForm" ng-submit="$ctrl.addAccount($ctrl.account)">
 
 
 	<fieldset class="form-group">
@@ -11,7 +11,7 @@
 			<label class="control-label" for="firstName">First Name</label>
 
 			<input class="form-control" placeholder="Ivan" type="text" id="firstName" name="firstName"
-				title="First Name" ng-model="$ctrl.phone.firstName" ng-minlength="2" required />
+				title="First Name" ng-model="$ctrl.account.firstName" ng-minlength="2" required />
 
 			<!-- err Msg -->
 			<div class="help-block" ng-messages="$ctrl.reviewForm.firstName.$error"
@@ -27,7 +27,7 @@
 			<label class="control-label" for="lastName">Last Name</label>
 
 			<input class="form-control" placeholder="Ivanov" type="text" id="lastName" name="lastName"
-				title="Last Name" ng-model="$ctrl.phone.lastName" ng-minlength="2" required />
+				title="Last Name" ng-model="$ctrl.account.lastName" ng-minlength="2" required />
 
 			<!-- err Msg -->
 			<div class="help-block" ng-messages="$ctrl.reviewForm.lastName.$error"
@@ -43,7 +43,7 @@
 			<label class="control-label" for="email">email</label>
 
 			<input class="form-control" placeholder="ivan@example.com" type="email" id="email" name="email"
-				title="email" ng-model="$ctrl.phone.email"
+				title="email" ng-model="$ctrl.account.email"
 				ng-pattern="/^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/" required />
 
 			<!-- err Msg -->
@@ -60,7 +60,7 @@
 			<label class="control-label" for="dateOfBirth">Date Of Birth</label>
 			<p class="input-group">
 				<input class="form-control" placeholder="1995-10-21" type="text" id="dateOfBirth"
-					name="dateOfBirth" title="Date Of Birth" ng-model="$ctrl.phone.dateOfBirth"
+					name="dateOfBirth" title="Date Of Birth" ng-model="$ctrl.account.dateOfBirth"
 					uib-datepicker-popup is-open="$ctrl.datepicker.opened" close-text="Close" />
 				<span class="input-group-btn">
 					<button type="button" class="form-control btn btn-default" ng-click="$ctrl.openDatepicker()">

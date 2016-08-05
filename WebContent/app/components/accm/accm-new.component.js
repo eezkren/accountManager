@@ -1,41 +1,38 @@
 'use strict';
 
-// Register `phoneDetail` component, along with its associated controller and
+// Register `accountNew` component, along with its associated controller and
 // template
-angular.module('phoneNew').component(
-		'phoneNew',
-		{
-			templateUrl : 'app/components/accm/accm-new.template.html',
-			controller : [ 'Phone', '$filter', 'Notification',
-					function PhoneNewController(Phone, $filter, Notification) {
+angular.module('accountNew').component('accountNew', {
+	templateUrl : 'app/components/accm/accm-new.template.html',
+	controller : [ 'Account', '$filter', 'Notification', function AccountNewController(Account, $filter, Notification) {
 
-						var ctrl = this;
+		var ctrl = this;
 
-						ctrl.phone = {};
-						ctrl.datepicker = {}
+		ctrl.account = {};
+		ctrl.datepicker = {}
 
-						ctrl.addAccount = function addAccount(phone) {
-							Phone.addAccount(phone).then(function(response) {
-								phone = response.data;
-								ctrl.phone = {};
-								ctrl.reviewForm.$setUntouched();
-								ctrl.success();
-							}, function(error) {
-								console.log("ERROR PhoneNewController")
-							});
-						},
+		ctrl.addAccount = function addAccount(account) {
+			Account.addAccount(account).then(function(response) {
+				account = response.data;
+				ctrl.account = {};
+				ctrl.reviewForm.$setUntouched();
+				ctrl.success();
+			}, function(error) {
+				console.log("ERROR AccountNewController -> addAccount")
+			});
+		},
 
-						ctrl.success = function success() {
-							var message = '<strong>Account Created</strong>';
+		ctrl.success = function success() {
+			var message = '<strong>Account Created</strong>';
 
-							Notification.success({
-								message : message,
-								delay : 3000
-							});
-						},
+			Notification.success({
+				message : message,
+				delay : 3000
+			});
+		},
 
-						ctrl.openDatepicker = function openDatepicker() {
-							ctrl.datepicker.opened = true;
-						}
-					} ]
-		});
+		ctrl.openDatepicker = function openDatepicker() {
+			ctrl.datepicker.opened = true;
+		}
+	} ]
+});

@@ -1,5 +1,4 @@
 'use strict';
 
-// Define the `phonecatApp` module
-angular.module('phonecatApp',
-		[ 'ngRoute', 'core', 'phoneDetail', 'phoneList', 'phoneEdit', 'phoneNew' ]);
+// Define the `accountcatApp` module
+angular.module('accountcatApp', [ 'ngRoute', 'core', 'accountDetails', 'accountList', 'accountEdit', 'accountNew' ]);

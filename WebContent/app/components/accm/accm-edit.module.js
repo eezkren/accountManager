@@ -1,4 +1,4 @@
 'use strict';
 
-// Define the `phoneDetail` module
-angular.module('phoneEdit', [ 'ngRoute', 'core.phone', 'ui-notification' ]);
+// Define the `accountEdit` module
+angular.module('accountEdit', [ 'ngRoute', 'core.account', 'ui-notification' ]);

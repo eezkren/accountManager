@@ -1,17 +1,16 @@
 'use strict';
 
-angular.module('phonecatApp').config(
-		[ '$locationProvider', '$routeProvider',
-				function config($locationProvider, $routeProvider) {
-					$locationProvider.hashPrefix('!');
+angular.module('accountcatApp').config(
+		[ '$locationProvider', '$routeProvider', function config($locationProvider, $routeProvider) {
+			$locationProvider.hashPrefix('!');
 
-					$routeProvider.when('/phones', {
-						template : '<phone-list></phone-list>'
-					}).when('/phones/new', {
-						template : '<phone-new></phone-new>'
-					}).when('/phones/:phoneId', {
-						template : '<phone-detail></phone-detail>'
-					}).when('/phones/:phoneId/edit', {
-						template : '<phone-edit></phone-edit>'
-					}).otherwise('/phones');
-				} ]);
+			$routeProvider.when('/accounts', {
+				template : '<account-list></account-list>'
+			}).when('/accounts/new', {
+				template : '<account-new></account-new>'
+			}).when('/accounts/:accountId', {
+				template : '<account-details></account-details>'
+			}).when('/accounts/:accountId/edit', {
+				template : '<account-edit></account-edit>'
+			}).otherwise('/accounts');
+		} ]);
