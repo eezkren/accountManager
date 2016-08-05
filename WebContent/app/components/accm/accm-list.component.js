@@ -7,7 +7,6 @@ angular.module('accountList').component('accountList', {
 	controller : [ 'Account', '$scope', function AccountListController(Account, $scope) {
 
 		this.accounts = null;
-		$scope = null;
 
 		getAccounts(this);
 

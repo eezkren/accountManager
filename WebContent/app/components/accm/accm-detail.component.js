@@ -3,6 +3,7 @@
 angular.module('accountDetails').component('accountDetails', {
 	templateUrl : 'app/components/accm/accm-detail.template.html',
 	controller : [ '$routeParams', 'Account', function AccountDetailsController($routeParams, Account) {
+
 		getAccount(this);
 
 		function getAccount(ctrl) {
