@@ -12,7 +12,7 @@ angular.module('phoneNew').component(
 						var ctrl = this;
 
 						ctrl.phone = {};
-						ctrl.popup2 = {}
+						ctrl.datepicker = {}
 
 						ctrl.addAccount = function addAccount(phone) {
 							Phone.addAccount(phone).then(function(response) {
@@ -34,8 +34,8 @@ angular.module('phoneNew').component(
 							});
 						},
 
-						ctrl.open2 = function open2() {
-							ctrl.popup2.opened = true;
+						ctrl.openDatepicker = function openDatepicker() {
+							ctrl.datepicker.opened = true;
 						}
 					} ]
 		});

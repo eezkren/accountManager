@@ -13,7 +13,7 @@ angular.module('phoneEdit').component('phoneEdit', {
 		getAccount(this);
 
 		ctrl.phone = {};
-		ctrl.popup2 = {}
+		ctrl.datepicker = {}
 
 		function getAccount(ctrl) {
 			Phone.getAccount({
@@ -22,7 +22,7 @@ angular.module('phoneEdit').component('phoneEdit', {
 				ctrl.phone = response.data;
 				ctrl.phone.dateOfBirth = new Date(ctrl.phone.dateOfBirth);
 			}, function(error) {
-				console.log("ERROR PhoneEditController")
+				console.log("ERROR PhoneEditController -> getAccount")
 			});
 		}
 
@@ -31,7 +31,7 @@ angular.module('phoneEdit').component('phoneEdit', {
 				phone = response.data;
 				ctrl.success();
 			}, function(error) {
-				console.log("ERROR PhoneNewController")
+				console.log("ERROR PhoneEditController -> updateAccount")
 			});
 		},
 
@@ -44,8 +44,8 @@ angular.module('phoneEdit').component('phoneEdit', {
 			});
 		},
 
-		ctrl.open2 = function open2() {
-			ctrl.popup2.opened = true;
+		ctrl.openDatepicker = function openDatepicker() {
+			ctrl.datepicker.opened = true;
 		}
 
 	} ]
