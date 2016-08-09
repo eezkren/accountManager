@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,46 +32,47 @@ public class AccountControllerWeb {
 
     // ALL
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public List<AccountDto> getAccounts() {
-        LOGGER.info("GET /account /list");
-        return userServiceWeb.getAccounts();
+    public ResponseEntity<List<AccountDto>> getAccounts() {
+	LOGGER.info("GET /account /list");
+	List<AccountDto> entityList = userServiceWeb.getAccounts();
+	return new ResponseEntity<List<AccountDto>>(entityList, HttpStatus.OK);
     }
 
     // FIND
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public AccountDto getAccountById(@PathVariable("id") Long id) {
-        LOGGER.info("GET /account /{id}: " + id);
-        return userServiceWeb.getAccountById(id);
+	LOGGER.info("GET /account /{id}: " + id);
+	return userServiceWeb.getAccountById(id);
     }
 
     // DELETE
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     @ResponseStatus(value = HttpStatus.OK)
     public boolean deleteAccountById(@PathVariable("id") Long id) {
-        LOGGER.info("DELETE /account /{id}: " + id);
-        userServiceWeb.deleteAccountById(id);
-        return true;
+	LOGGER.info("DELETE /account /{id}: " + id);
+	userServiceWeb.deleteAccountById(id);
+	return true;
     }
 
     // UPDATE
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     @ResponseStatus(HttpStatus.OK)
     public Account saveAccountById(@RequestBody AccountDto accountDTO, @PathVariable Long id) {
-        LOGGER.info("UPDATE /account /{id}: " + id);
+	LOGGER.info("UPDATE /account /{id}: " + id);
 
-        Account updatedAccount = userServiceWeb.saveAccount(accountDTO);
+	Account updatedAccount = userServiceWeb.saveAccount(accountDTO);
 
-        return updatedAccount;
+	return updatedAccount;
     }
 
     // NEW
     @RequestMapping(value = "/new", method = RequestMethod.POST)
     public Account registerAccount(@Valid @RequestBody AccountDto newAccount, WebRequest request) {
-        LOGGER.info("POST /account/register");
+	LOGGER.info("POST /account/register");
 
-        Account savedAccount = userServiceWeb.saveAccount(newAccount);
+	Account savedAccount = userServiceWeb.saveAccount(newAccount);
 
-        return savedAccount;
+	return savedAccount;
     }
 
 }

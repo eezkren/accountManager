@@ -45,7 +45,8 @@
 
 			<input class="form-control" type="email" id="email" name="email" title="email"
 				ng-model="$ctrl.account.email"
-				ng-pattern="/^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/" required />
+				ng-pattern="^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$"
+				required />
 
 			<!-- err Msg -->
 			<div class="help-block" ng-messages="$ctrl.reviewForm.email.$error"

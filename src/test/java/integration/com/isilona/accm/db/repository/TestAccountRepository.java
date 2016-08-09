@@ -1,10 +1,12 @@
 package integration.com.isilona.accm.db.repository;
 
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
+
 import java.io.File;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTransactionalTestNGSpringContextTests;
 import org.testng.annotations.Test;
@@ -15,7 +17,6 @@ import com.isilona.accm.db.repository.AccountRepository;
 import com.isilona.accm.util.JsonReader;
 
 @ContextConfiguration(classes = { RootConfig.class })
-@Rollback(value = false)
 public class TestAccountRepository extends AbstractTransactionalTestNGSpringContextTests {
 
     @Autowired
@@ -24,12 +25,20 @@ public class TestAccountRepository extends AbstractTransactionalTestNGSpringCont
     @Test
     public void saveAll() {
 
-        ClassLoader classLoader = getClass().getClassLoader();
-        File file = new File(classLoader.getResource("repository/accountData.json").getFile());
+	List<Account> existingAccounts = accountRepository.findAll();
+	int existingAccountsSize = existingAccounts.size();
 
-        List<Account> accounts = JsonReader.getJsonData(file, Account.class);
+	ClassLoader classLoader = getClass().getClassLoader();
+	File file = new File(classLoader.getResource("repository/accountData.json").getFile());
 
-        accountRepository.save(accounts);
+	List<Account> accountsToAdd = JsonReader.getJsonData(file, Account.class);
+
+	accountRepository.save(accountsToAdd);
+
+	List<Account> currentAccounts = accountRepository.findAll();
+	int currentAccountsSize = currentAccounts.size();
+
+	assertThat(currentAccountsSize, is(existingAccountsSize + 2));
 
     }
 
