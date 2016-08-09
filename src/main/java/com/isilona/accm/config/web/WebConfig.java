@@ -20,7 +20,7 @@ import com.isilona.accm.config.AppConfig;
  *
  */
 @EnableWebMvc
-@ComponentScan("com.isilona.accm.web")
+@ComponentScan("com.isilona.accm.web.controller")
 public class WebConfig extends AppConfig {
 
     @Autowired
@@ -31,14 +31,14 @@ public class WebConfig extends AppConfig {
 
     @Bean
     public LocalValidatorFactoryBean validator() {
-        LocalValidatorFactoryBean validatorFactoryBean = new LocalValidatorFactoryBean();
-        validatorFactoryBean.setValidationMessageSource(messageSource);
-        return validatorFactoryBean;
+	LocalValidatorFactoryBean validatorFactoryBean = new LocalValidatorFactoryBean();
+	validatorFactoryBean.setValidationMessageSource(messageSource);
+	return validatorFactoryBean;
     }
 
     @Override
     public Validator getValidator() {
-        return validator();
+	return validator();
     }
 
 }

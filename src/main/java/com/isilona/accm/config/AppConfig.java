@@ -22,7 +22,7 @@ public class AppConfig extends WebMvcConfigurerAdapter {
 
     @Override
     public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
-        configurer.enable();
+	configurer.enable();
     }
 
     /**
@@ -30,7 +30,7 @@ public class AppConfig extends WebMvcConfigurerAdapter {
      */
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
+	registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
     }
 
     /**
@@ -38,7 +38,7 @@ public class AppConfig extends WebMvcConfigurerAdapter {
      */
     @Bean
     public MappingJackson2HttpMessageConverter jsonMessageConverter() {
-        return new MappingJackson2HttpMessageConverter();
+	return new MappingJackson2HttpMessageConverter();
     }
 
     /**
@@ -46,10 +46,10 @@ public class AppConfig extends WebMvcConfigurerAdapter {
      */
     @Bean
     public RequestMappingHandlerAdapter jsonRequestMapping() {
-        RequestMappingHandlerAdapter rmha = new RequestMappingHandlerAdapter();
-        HttpMessageConverter<?>[] messageConverters = new HttpMessageConverter<?>[] { jsonMessageConverter() };
-        rmha.setMessageConverters(Arrays.asList(messageConverters));
-        return rmha;
+	RequestMappingHandlerAdapter rmha = new RequestMappingHandlerAdapter();
+	HttpMessageConverter<?>[] messageConverters = new HttpMessageConverter<?>[] { jsonMessageConverter() };
+	rmha.setMessageConverters(Arrays.asList(messageConverters));
+	return rmha;
     }
 
 }
