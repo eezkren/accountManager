@@ -32,27 +32,24 @@ public class AccountServiceWeb {
     @Autowired
     ApplicationEventPublisher eventPublisher;
 
+    // CREATE / UPDATE
+
     /**
-     * Get list with all {@link Account}s
+     * Create / Update {@link Account}
      * 
-     * @param accountToCreate
-     * @return status of the request
+     * @param accountDto
+     * @return
      */
+    public Account saveAccount(AccountDto accountDto) {
 
-    // ALL
-    public List<AccountDto> getAccounts() {
+	Account toSave = mapper.accountDtoToAccount(accountDto);
 
-	List<Account> accounts = accountRepository.findAll();
-	List<AccountDto> usersResponse = new ArrayList<AccountDto>(accounts.size());
+	Account saved = accountRepository.save(toSave);
 
-	for (Account account : accounts) {
-	    // AccountDto userDTO = object2dto(account);
-	    AccountDto userDTO = mapper.accountToAccountDto(account);
-	    usersResponse.add(userDTO);
-	}
-
-	return usersResponse;
+	return saved;
     }
+
+    // READ
 
     /**
      * Find one {@link Account} by a given id
@@ -60,102 +57,50 @@ public class AccountServiceWeb {
      * @param id
      * @return
      */
-
-    // FIND
     public AccountDto getAccountById(Long id) {
 
-	Account account = accountRepository.findOne(id);
-	// AccountDto responseDTO = object2dto(account);
-	AccountDto responseDTO = mapper.accountToAccountDto(account);
+	Account found = accountRepository.findOne(id);
 
-	return responseDTO;
+	AccountDto responseDto = mapper.accountToAccountDto(found);
+
+	return responseDto;
     }
 
+    // DELETE
+
     /**
-     * delete one {@link Account} by a given id
+     * Delete one {@link Account} by a given id
      * 
      * @param id
      * @return
      */
 
-    // DELETE
     public void deleteAccountById(Long id) {
 
 	accountRepository.delete(id);
 
     }
 
+    // ALL
+
     /**
-     * delete one {@link Account} by a given id
+     * Get list with all {@link Account}s
      * 
-     * @param id
-     * @return
+     * @param accountToCreate
+     * @return status of the request
      */
-    public Account saveAccount(AccountDto accountDTO) {
 
-	// Account toSave = dto2object(accountDTO);
+    public List<AccountDto> getAccounts() {
 
-	Account toSave = mapper.accountDtoToAccount(accountDTO);
+	List<Account> allList = accountRepository.findAll();
+	List<AccountDto> responseList = new ArrayList<AccountDto>(allList.size());
 
-	Account newAcc = accountRepository.save(toSave);
+	for (Account entity : allList) {
+	    AccountDto dto = mapper.accountToAccountDto(entity);
+	    responseList.add(dto);
+	}
 
-	return newAcc;
+	return responseList;
     }
-
-    /**
-     * 
-     * Transformation method - Creates {@link AccountDto} from given
-     * {@link Account}
-     * 
-     * @param account
-     * @return
-     */
-    // private AccountDto object2dto(Account account) {
-    //
-    // AccountDto result = new AccountDto();
-    //
-    // result.setId(account.getId());
-    // result.setFirstName(account.getFirstName());
-    // result.setLastName(account.getLastName());
-    // result.setEmail(account.getEmail());
-    //
-    // if (null == account.getDateOfBirth()) {
-    // // result.setDateOfBirth("");
-    // } else {
-    // // result.setDateOfBirth(account.getDateOfBirth().toString());
-    // }
-    //
-    // return result;
-    //
-    // }
-
-    /**
-     * 
-     * Transformation method - Creates {@link Account} from given
-     * {@link AccountDto}
-     * 
-     * @param dto
-     * @return
-     */
-    // private Account dto2object(AccountDto dto) {
-    //
-    // Account result = new Account();
-    //
-    // result.setId(dto.getId());
-    // result.setFirstName(dto.getFirstName());
-    // result.setLastName(dto.getLastName());
-    // result.setEmail(dto.getEmail());
-    //
-    // if ("".equals(dto.getDateOfBirth())) {
-    // result.setDateOfBirth(null);
-    // } else {
-    // DateTimeFormatter formatter =
-    // DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
-    // result.setDateOfBirth(LocalDate.parse(dto.getDateOfBirth(), formatter));
-    // }
-    //
-    // return result;
-    //
-    // }
 
 }
