@@ -2,10 +2,14 @@ package unit.com.isilona.accm.web.service;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.time.LocalDate;
 import java.time.Month;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -107,9 +111,22 @@ public class TestAccountServiceWeb extends AbstractTestNGSpringContextTests {
     @Test
     public void getAccountById() {
 
-	// create new
+	Account toFindEntity = new Account();
+	toFindEntity.setFirstName("First Name Found");
+	toFindEntity.setLastName("Last Name Found");
+	toFindEntity.setEmail("Email Found");
+	toFindEntity.setDateOfBirth(LocalDate.of(2016, Month.AUGUST, 11));
+	toFindEntity.setId(3L);
 
-	// find previously created
+	when(accountRepository.findOne(3L)).thenReturn(toFindEntity);
+
+	AccountDto foundResult = accountService.getAccountById(3L);
+
+	assertThat(foundResult.getFirstName(), is("First Name Found"));
+	assertThat(foundResult.getLastName(), is("Last Name Found"));
+	assertThat(foundResult.getEmail(), is("Email Found"));
+	assertThat(foundResult.getDateOfBirth(), is("2016-08-11"));
+	assertThat(foundResult.getId(), is("3"));
 
     }
 
@@ -118,9 +135,9 @@ public class TestAccountServiceWeb extends AbstractTestNGSpringContextTests {
     @Test
     public void deleteAccountById() {
 
-	// create new
+	accountService.deleteAccountById(4L);
 
-	// delete previously created
+	verify(accountRepository, times(1)).delete(4L);
 
     }
 
@@ -129,18 +146,40 @@ public class TestAccountServiceWeb extends AbstractTestNGSpringContextTests {
     @Test
     public void getAccounts() {
 
-    }
+	Account toFindEntity1 = new Account();
+	toFindEntity1.setFirstName("First Name 1");
+	toFindEntity1.setLastName("Last Name 1");
+	toFindEntity1.setEmail("Email 1");
+	toFindEntity1.setDateOfBirth(LocalDate.of(2016, Month.JULY, 2));
+	toFindEntity1.setId(5L);
 
-    @Test
-    public void deleteWithPermission() {
-	Account account = new Account();
-	account.setFirstName("FN");
+	Account toFindEntity2 = new Account();
+	toFindEntity2.setFirstName("First Name 2");
+	toFindEntity2.setLastName("Last Name 2");
+	toFindEntity2.setEmail("Email 2");
+	toFindEntity2.setDateOfBirth(LocalDate.of(2016, Month.JULY, 3));
+	toFindEntity2.setId(6L);
 
-	when(accountRepository.findOne(1L)).thenReturn(account);
+	List<Account> toFindList = new ArrayList<Account>();
+	toFindList.add(toFindEntity1);
+	toFindList.add(toFindEntity2);
 
-	AccountDto result = accountService.getAccountById(1L);
+	when(accountRepository.findAll()).thenReturn(toFindList);
 
-	assertThat(result.getFirstName(), is("FN"));
+	List<AccountDto> foundResult = accountService.getAccounts();
+
+	assertThat(foundResult.get(0).getFirstName(), is("First Name 1"));
+	assertThat(foundResult.get(0).getLastName(), is("Last Name 1"));
+	assertThat(foundResult.get(0).getEmail(), is("Email 1"));
+	assertThat(foundResult.get(0).getDateOfBirth(), is("2016-07-02"));
+	assertThat(foundResult.get(0).getId(), is("5"));
+
+	assertThat(foundResult.get(1).getFirstName(), is("First Name 2"));
+	assertThat(foundResult.get(1).getLastName(), is("Last Name 2"));
+	assertThat(foundResult.get(1).getEmail(), is("Email 2"));
+	assertThat(foundResult.get(1).getDateOfBirth(), is("2016-07-03"));
+	assertThat(foundResult.get(1).getId(), is("6"));
+
     }
 
 }
