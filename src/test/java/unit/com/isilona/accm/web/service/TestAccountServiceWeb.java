@@ -70,13 +70,13 @@ public class TestAccountServiceWeb extends AbstractTestNGSpringContextTests {
 
 	when(accountRepository.save(Mockito.any(Account.class))).thenReturn(createdEntity);
 
-	Account createdResult = accountService.saveAccount(toCreateDto);
+	AccountDto createdResult = accountService.saveAccount(toCreateDto);
 
 	assertThat(createdResult.getFirstName(), is("First Name New"));
 	assertThat(createdResult.getLastName(), is("Last Name New"));
 	assertThat(createdResult.getEmail(), is("Email New"));
-	assertThat(createdResult.getDateOfBirth(), is(LocalDate.of(2016, Month.AUGUST, 24)));
-	assertThat(createdResult.getId(), is(1L));
+	assertThat(createdResult.getDateOfBirth(), is("2016-08-24"));
+	assertThat(createdResult.getId(), is("1"));
 
 	// update
 
@@ -96,13 +96,13 @@ public class TestAccountServiceWeb extends AbstractTestNGSpringContextTests {
 
 	when(accountRepository.save(Mockito.any(Account.class))).thenReturn(updatedEntity);
 
-	Account updatedResult = accountService.saveAccount(toUpdateDto);
+	AccountDto updatedResult = accountService.saveAccount(toUpdateDto);
 
 	assertThat(updatedResult.getFirstName(), is("First Name Updated"));
 	assertThat(updatedResult.getLastName(), is("Last Name Updated"));
 	assertThat(updatedResult.getEmail(), is("Email Updated"));
-	assertThat(updatedResult.getDateOfBirth(), is(LocalDate.of(2016, Month.AUGUST, 25)));
-	assertThat(updatedResult.getId(), is(2L));
+	assertThat(updatedResult.getDateOfBirth(), is("2016-08-25"));
+	assertThat(updatedResult.getId(), is("2"));
 
     }
 

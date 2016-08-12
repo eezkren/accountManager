@@ -40,13 +40,15 @@ public class AccountServiceWeb {
      * @param accountDto
      * @return
      */
-    public Account saveAccount(AccountDto accountDto) {
+    public AccountDto saveAccount(AccountDto accountDto) {
 
 	Account toSave = mapper.accountDtoToAccount(accountDto);
 
 	Account saved = accountRepository.save(toSave);
 
-	return saved;
+	AccountDto result = mapper.accountToAccountDto(saved);
+
+	return result;
     }
 
     // READ
