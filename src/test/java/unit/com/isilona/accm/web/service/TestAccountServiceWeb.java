@@ -2,8 +2,6 @@ package unit.com.isilona.accm.web.service;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.time.LocalDate;
@@ -135,9 +133,22 @@ public class TestAccountServiceWeb extends AbstractTestNGSpringContextTests {
     @Test
     public void deleteAccountById() {
 
-	accountService.deleteAccountById(4L);
+	Account toDeleteEntity = new Account();
+	toDeleteEntity.setFirstName("First Name Delete");
+	toDeleteEntity.setLastName("Last Name Delete");
+	toDeleteEntity.setEmail("Email Delete");
+	toDeleteEntity.setDateOfBirth(LocalDate.of(2016, Month.AUGUST, 11));
+	toDeleteEntity.setId(4L);
 
-	verify(accountRepository, times(1)).delete(4L);
+	when(accountRepository.findOne(4L)).thenReturn(toDeleteEntity);
+
+	AccountDto deleteResult = accountService.deleteAccountById(4L);
+
+	assertThat(deleteResult.getFirstName(), is("First Name Delete"));
+	assertThat(deleteResult.getLastName(), is("Last Name Delete"));
+	assertThat(deleteResult.getEmail(), is("Email Delete"));
+	assertThat(deleteResult.getDateOfBirth(), is("2016-08-11"));
+	assertThat(deleteResult.getId(), is("4"));
 
     }
 

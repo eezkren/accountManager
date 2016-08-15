@@ -3,23 +3,33 @@ package com.isilona.accm.web.data;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ErrorResponse extends ResponseBase {
+public class ErrorResponse {
 
-    private static final long serialVersionUID = 8794566216756271922L;
-    private List<String> messageList;
+    private String url;
 
-    public List<String> getMessageList() {
-        return messageList;
+    private List<ErrorHolder> errorHolderList;
+
+    public String getUrl() {
+	return url;
     }
 
-    public void setMessageList(List<String> messageList) {
-        this.messageList = messageList;
+    public void setUrl(String url) {
+	this.url = url;
     }
 
-    public void addMessage(String message) {
-        if (this.messageList == null) {
-            messageList = new ArrayList<>();
-        }
-        messageList.add(message);
+    public void addErrorHolder(ErrorHolder errorHolder) {
+	if (this.errorHolderList == null) {
+	    errorHolderList = new ArrayList<>();
+	}
+	errorHolderList.add(errorHolder);
     }
+
+    public List<ErrorHolder> getErrorHolderList() {
+	return errorHolderList;
+    }
+
+    public void setErrorHolderList(List<ErrorHolder> errorHolder) {
+	this.errorHolderList = errorHolder;
+    }
+
 }

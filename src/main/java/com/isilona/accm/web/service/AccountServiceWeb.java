@@ -70,16 +70,15 @@ public class AccountServiceWeb {
 
     // DELETE
 
-    /**
-     * Delete one {@link Account} by a given id
-     * 
-     * @param id
-     * @return
-     */
+    public AccountDto deleteAccountById(Long id) {
 
-    public void deleteAccountById(Long id) {
+	Account found = accountRepository.findOne(id);
 
-	accountRepository.delete(id);
+	AccountDto responseDto = mapper.accountToAccountDto(found);
+
+	accountRepository.delete(found);
+
+	return responseDto;
 
     }
 

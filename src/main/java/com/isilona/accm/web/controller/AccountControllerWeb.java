@@ -2,6 +2,8 @@ package com.isilona.accm.web.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,21 +26,21 @@ public class AccountControllerWeb {
     private static final Logger LOGGER = LoggerFactory.getLogger(AccountControllerWeb.class);
 
     @Autowired
-    private AccountServiceWeb userServiceWeb;
+    private AccountServiceWeb accountServiceWeb;
 
     // CREATE
     @RequestMapping(value = "/new", method = RequestMethod.POST)
-    public ResponseEntity<AccountDto> createAccount(@RequestBody AccountDto newAccount) {
+    public ResponseEntity<AccountDto> createAccount(@Valid @RequestBody AccountDto newAccount) {
 	LOGGER.info("POST /account/new");
-	AccountDto savedAccount = userServiceWeb.saveAccount(newAccount);
+	AccountDto savedAccount = accountServiceWeb.saveAccount(newAccount);
 	return new ResponseEntity<AccountDto>(savedAccount, HttpStatus.OK);
     }
 
     // UPDATE
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<AccountDto> updateAccount(@RequestBody AccountDto accountDTO, @PathVariable Long id) {
+    public ResponseEntity<AccountDto> updateAccount(@Valid @RequestBody AccountDto accountDTO, @PathVariable Long id) {
 	LOGGER.info("PUT /account/" + id);
-	AccountDto updatedAccount = userServiceWeb.saveAccount(accountDTO);
+	AccountDto updatedAccount = accountServiceWeb.saveAccount(accountDTO);
 	return new ResponseEntity<AccountDto>(updatedAccount, HttpStatus.OK);
     }
 
@@ -46,24 +48,24 @@ public class AccountControllerWeb {
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<AccountDto> getAccountById(@PathVariable("id") Long id) {
 	LOGGER.info("GET /account/" + id);
-	AccountDto result = userServiceWeb.getAccountById(id);
+	AccountDto result = accountServiceWeb.getAccountById(id);
 	return new ResponseEntity<AccountDto>(result, HttpStatus.OK);
     }
 
     // DELETE
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     @ResponseStatus(value = HttpStatus.OK)
-    public boolean deleteAccountById(@PathVariable("id") Long id) {
+    public ResponseEntity<AccountDto> deleteAccountById(@PathVariable("id") Long id) {
 	LOGGER.info("DELETE /account/" + id);
-	userServiceWeb.deleteAccountById(id);
-	return true;
+	AccountDto result = accountServiceWeb.deleteAccountById(id);
+	return new ResponseEntity<AccountDto>(result, HttpStatus.OK);
     }
 
     // ALL
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public ResponseEntity<List<AccountDto>> getAccounts() {
 	LOGGER.info("GET /account/list");
-	List<AccountDto> entityList = userServiceWeb.getAccounts();
+	List<AccountDto> entityList = accountServiceWeb.getAccounts();
 	return new ResponseEntity<List<AccountDto>>(entityList, HttpStatus.OK);
     }
 
