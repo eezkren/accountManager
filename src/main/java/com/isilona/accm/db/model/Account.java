@@ -11,8 +11,12 @@ import javax.persistence.Entity;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
+import org.hibernate.envers.AuditTable;
+import org.hibernate.envers.Audited;
 
 @Entity(name = "account")
+@Audited
+@AuditTable("account_history")
 public class Account extends AbstractPersistentObject {
 
     private static final long serialVersionUID = -583018120904760175L;

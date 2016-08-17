@@ -14,11 +14,8 @@
 		<org.springframework.data-version>1.10.2.RELEASE</org.springframework.data-version>
 
 
-		<!-- ################ validation ############## -->
-		<org.hibernate-validator-version>5.2.4.Final</org.hibernate-validator-version>
-
 		<!-- ############# Hibernate dependencies ############ -->
-		<org.hibernate-version-n>5.1.0.Final</org.hibernate-version-n>
+		<org.hibernate-version>5.2.2.Final</org.hibernate-version>
 		<!-- ################ validation ############## -->
 		<org.hibernate-validator-version>5.2.4.Final</org.hibernate-validator-version>
 
@@ -132,13 +129,20 @@
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-entitymanager</artifactId>
-			<version>${org.hibernate-version-n}</version>
+			<version>${org.hibernate-version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-java8</artifactId>
-			<version>${org.hibernate-version-n}</version>
+			<version>${org.hibernate-version}</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-envers -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-envers</artifactId>
+			<version>${org.hibernate-version}</version>
 		</dependency>
 
 
@@ -270,6 +274,15 @@
 			<artifactId>mapstruct-jdk8</artifactId>
 			<version>${org.mapstruct.version}</version>
 		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.springframework.data/spring-data-envers -->
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-envers</artifactId>
+			<version>1.0.2.RELEASE</version>
+		</dependency>
+
+
 
 
 
