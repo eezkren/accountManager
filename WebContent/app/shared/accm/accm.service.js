@@ -20,8 +20,8 @@ angular.module('core.account').factory('Account', [ '$http', function($http) {
 		return $http.post(urlBase + '/new', cust);
 	};
 
-	Account.updateCustomer = function(cust) {
-		return $http.put(urlBase + '/' + cust.ID, cust)
+	Account.updateAccount = function(cust) {
+		return $http.put(urlBase + '/' + cust.id, cust)
 	};
 
 	 Account.deleteCustomer = function (id) {

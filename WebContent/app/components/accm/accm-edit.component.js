@@ -27,7 +27,7 @@ angular.module('accountEdit').component('accountEdit', {
 		}
 
 		ctrl.updateAccount = function updateAccount(account) {
-			Account.addAccount(account).then(function(response) {
+			Account.updateAccount(account).then(function(response) {
 				account = response.data;
 				ctrl.success();
 			}, function(error) {
