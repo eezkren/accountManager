@@ -44,7 +44,7 @@
 
 			<input class="form-control" placeholder="ivan@example.com" type="email" id="email" name="email"
 				title="email" ng-model="$ctrl.account.email"
-				ng-pattern="^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$"
+				ng-pattern="/^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$/"
 				required />
 
 			<!-- err Msg -->
