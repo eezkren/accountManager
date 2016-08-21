@@ -26,6 +26,9 @@
 <link rel="stylesheet" type="text/css"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
 
+<link rel="stylesheet" type="text/css"
+	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" />
+
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <link href="assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
 
@@ -61,18 +64,12 @@
 					<span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span> <span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#">Project name</a>
+				<a class="navbar-brand" href="#">Account List</a>
 			</div>
 			<div id="navbar" class="navbar-collapse collapse">
-				<form class="navbar-form navbar-right">
-					<div class="form-group">
-						<input type="text" placeholder="Email" class="form-control">
-					</div>
-					<div class="form-group">
-						<input type="password" placeholder="Password" class="form-control">
-					</div>
-					<button type="submit" class="btn btn-success">Sign in</button>
-				</form>
+				<div class="navbar-form navbar-right">
+					<a class="btn btn-primary" href="#!/accounts/new" role="button">New</a>
+				</div>
 			</div>
 			<!--/.navbar-collapse -->
 		</div>
@@ -81,13 +78,9 @@
 	<!-- Main jumbotron for a primary marketing message or call to action -->
 	<div class="jumbotron">
 		<div class="container">
-			<h1>Hello, world!</h1>
-			<p>This is a template for a simple marketing or informational website. It includes a large
-				callout called a jumbotron and three supporting pieces of content. Use it as a starting point to
-				create something more unique.</p>
+			<h2>Hello, world!</h2>
+			<p>This is a small AngularJS/Spring SPA allowing CRUD operations on a simple Account entity.
 			<p>
-				<a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a>
-			</p>
 		</div>
 	</div>
 
@@ -95,75 +88,88 @@
 		<!-- Example row of columns -->
 
 		<div class="view-container">
-			<div ng-view class="view-frame"></div>
+			<div ng-view class="view-frame">
+				</d
+		iv>
+			</div>
+			<hr>
+
+			<footer>
+				<p>
+					&copy; 2015 isilona |
+					<a href="https://www.linkedin.com/in/isilona" target="_blank">
+						<i class="fa fa-linkedin-square" aria-hidden="true"></i> LinkedIn
+					</a>
+					|
+					<a href="https://github.com/isilona" target="_blank">
+						<i class="fa fa-github" aria-hidden="true"></i> GitHub
+					</a>
+
+
+				</p>
+			</footer>
 		</div>
-		<hr>
-
-		<footer>
-			<p>&copy; 2015 Company, Inc.</p>
-		</footer>
-	</div>
-	<!-- /container -->
+		<!-- /container -->
 
 
-	<!-- Bootstrap core JavaScript
+		<!-- Bootstrap core JavaScript
     ================================================== -->
-	<!-- Placed at the end of the document so the pages load faster -->
+		<!-- Placed at the end of the document so the pages load faster -->
 
 
 
-	<script type="text/javascript"
-		src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-	<script type="text/javascript"
-		src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.min.js"></script>
+		<script type="text/javascript"
+			src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+		<script type="text/javascript"
+			src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.min.js"></script>
 
-	<script type="text/javascript"
-		src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular-resource.min.js"></script>
+		<script type="text/javascript"
+			src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular-resource.min.js"></script>
 
-	<script type="text/javascript"
-		src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular-route.min.js"></script>
+		<script type="text/javascript"
+			src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular-route.min.js"></script>
 
-	<script type="text/javascript"
-		src="https://cdnjs.cloudflare.com/ajax/libs/angular-messages/1.5.8/angular-messages.min.js"></script>
+		<script type="text/javascript"
+			src="https://cdnjs.cloudflare.com/ajax/libs/angular-messages/1.5.8/angular-messages.min.js"></script>
 
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-animate.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-animate.js"></script>
 
-	<script src="https://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-2.0.0.js"></script>
+		<script src="https://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-2.0.0.js"></script>
 
-	<script
-		src="https://rawgit.com/alexcrack/angular-ui-notification/master/dist/angular-ui-notification.js"></script>
+		<script
+			src="https://rawgit.com/alexcrack/angular-ui-notification/master/dist/angular-ui-notification.js"></script>
 
 
 
-	<script type="text/javascript" src="app/app.module-accm.js"></script>
+		<script type="text/javascript" src="app/app.module-accm.js"></script>
 
-	<script type="text/javascript" src="app/app.routes-accm.js"></script>
+		<script type="text/javascript" src="app/app.routes-accm.js"></script>
 
-	<script type="text/javascript" src="app/shared/core.module-accm.js"></script>
+		<script type="text/javascript" src="app/shared/core.module-accm.js"></script>
 
-	<script type="text/javascript" src="app/shared/checkmark/checkmark.filter.js"></script>
+		<script type="text/javascript" src="app/shared/checkmark/checkmark.filter.js"></script>
 
-	<script type="text/javascript" src="app/shared/accm/accm.module.js"></script>
+		<script type="text/javascript" src="app/shared/accm/accm.module.js"></script>
 
-	<script type="text/javascript" src="app/shared/accm/accm.service.js"></script>
+		<script type="text/javascript" src="app/shared/accm/accm.service.js"></script>
 
-	<script type="text/javascript" src="app/components/accm/accm-list.module.js"></script>
-	`
-	<script type="text/javascript" src="app/components/accm/accm-list.component.js"></script>
+		<script type="text/javascript" src="app/components/accm/accm-list.module.js"></script>
 
-	<script type="text/javascript" src="app/components/accm/accm-detail.module.js"></script>
+		<script type="text/javascript" src="app/components/accm/accm-list.component.js"></script>
 
-	<script type="text/javascript" src="app/components/accm/accm-detail.component.js"></script>
+		<script type="text/javascript" src="app/components/accm/accm-detail.module.js"></script>
 
-	<script type="text/javascript" src="app/components/accm/accm-edit.module.js"></script>
-	`
-	<script type="text/javascript" src="app/components/accm/accm-edit.component.js"></script>
+		<script type="text/javascript" src="app/components/accm/accm-detail.component.js"></script>
 
-	<script type="text/javascript" src="app/components/accm/accm-new.module.js"></script>
-	`
-	<script type="text/javascript" src="app/components/accm/accm-new.component.js"></script>
+		<script type="text/javascript" src="app/components/accm/accm-edit.module.js"></script>
 
-	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-	<script src="assets/js/ie10-viewport-bug-workaround.js"></script>
+		<script type="text/javascript" src="app/components/accm/accm-edit.component.js"></script>
+
+		<script type="text/javascript" src="app/components/accm/accm-new.module.js"></script>
+
+		<script type="text/javascript" src="app/components/accm/accm-new.component.js"></script>
+
+		<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+		<script src="assets/js/ie10-viewport-bug-workaround.js"></script>
 </body>
 </html>

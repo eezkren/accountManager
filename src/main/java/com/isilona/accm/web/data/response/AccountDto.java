@@ -12,6 +12,7 @@ import com.isilona.accm.validation.ValidEmail;
 public class AccountDto {
 
     private String id;
+
     @NotNull(message = "{validation.account.firstName.NotNull}")
     @Size(min = 2, message = "{validation.account.firstName.Size}")
     private String firstName;
