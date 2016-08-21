@@ -5,9 +5,9 @@ import javax.persistence.Entity;
 import org.hibernate.envers.DefaultRevisionEntity;
 import org.hibernate.envers.RevisionEntity;
 
-@Entity
+@Entity(name = "revision")
 @RevisionEntity(CustomRevisionListener.class)
-public class Revision extends DefaultRevisionEntity {
+public class CustomRevision extends DefaultRevisionEntity {
 
     private static final long serialVersionUID = -3501059059811802486L;
 

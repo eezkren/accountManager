@@ -27,6 +27,10 @@ angular.module('core.account').factory('Account', [ '$http', function($http) {
 	 Account.deleteCustomer = function (id) {
 		 return $http.delete(urlBase + '/' + id);
 	 };
+	 
+	 Account.getHistory = function(id) {
+			return $http.get(urlBase + '/' + id.accountId + "/history");
+		};
 
 	return Account;
 } ]);

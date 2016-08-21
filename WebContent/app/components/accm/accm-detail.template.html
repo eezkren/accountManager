@@ -12,6 +12,37 @@
 		</tr>
 	</table>
 </div>
+
+<div class="panel panel-default">
+	<!-- Default panel contents -->
+	<div class="panel-heading">History</div>
+
+	<!-- Table -->
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Firstname</th>
+				<th>Lastname</th>
+				<th>Email</th>
+				<th>DateOfBirth</th>
+				<th>Updated By</th>
+				<th>Updated at</th>
+			</tr>
+		</thead>
+		<tbody>
+
+			<tr ng-repeat="revision in $ctrl.history">
+				<td>{{revision.account.firstName}}</td>
+				<td>{{revision.account.lastName}}</td>
+				<td>{{revision.account.email}}</td>
+				<td>{{revision.account.dateOfBirth}}</td>
+				<td>{{revision.revision.remoteIp}}</td>
+				<td>{{revision.revision.revisionDate}}</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+
 <p>
 	<a class="btn btn-primary" href="#!/accounts/{{$ctrl.account.id}}/edit" role="button">Edit</a>
 </p>

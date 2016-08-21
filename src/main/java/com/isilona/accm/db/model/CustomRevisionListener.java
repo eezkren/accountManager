@@ -14,7 +14,7 @@ public class CustomRevisionListener implements RevisionListener {
 	String remoteAddress = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest()
 		.getRemoteAddr();
 
-	Revision revision = (Revision) genericRevision;
+	CustomRevision revision = (CustomRevision) genericRevision;
 	revision.setRemoteIp(remoteAddress);
     }
 }

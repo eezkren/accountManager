@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.isilona.accm.web.data.response.AccountDto;
+import com.isilona.accm.web.data.response.AccountRevisionDto;
 import com.isilona.accm.web.service.AccountServiceWeb;
 
 @RestController
@@ -67,6 +68,14 @@ public class AccountControllerWeb {
 	LOGGER.info("GET /account/list");
 	List<AccountDto> entityList = accountServiceWeb.getAccounts();
 	return new ResponseEntity<List<AccountDto>>(entityList, HttpStatus.OK);
+    }
+
+    // HISTORY
+    @RequestMapping(value = "/{id}/history", method = RequestMethod.GET)
+    public ResponseEntity<List<AccountRevisionDto>> getHistory(@PathVariable("id") Long id) {
+	LOGGER.info("GET /account/" + id + "/history");
+	List<AccountRevisionDto> entityList = accountServiceWeb.getHistory(id);
+	return new ResponseEntity<List<AccountRevisionDto>>(entityList, HttpStatus.OK);
     }
 
 }
