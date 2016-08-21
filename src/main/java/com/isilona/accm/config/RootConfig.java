@@ -1,5 +1,6 @@
 package com.isilona.accm.config;
 
+import org.jasypt.util.text.StrongTextEncryptor;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -43,6 +44,15 @@ public class RootConfig {
 	localValidatorFactoryBean.setValidationMessageSource(messageSource());
 
 	return localValidatorFactoryBean;
+    }
+
+    @Bean
+    public StrongTextEncryptor encryptor() {
+
+	StrongTextEncryptor encryptor = new StrongTextEncryptor();
+	encryptor.setPassword(System.getenv().get("ENC_KEY"));
+
+	return encryptor;
     }
 
 }

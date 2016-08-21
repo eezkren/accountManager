@@ -47,10 +47,49 @@
 
 	</properties>
 
+	<profiles>
+		<profile>
+			<id>dev</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<env>dev</env>
+			</properties>
+		</profile>
+		<profile>
+			<id>live</id>
+			<properties>
+				<env>live</env>
+			</properties>
+		</profile>
+	</profiles>
+
 	<build>
-		<sourceDirectory>src/main</sourceDirectory>
-		<testSourceDirectory>src/test</testSourceDirectory>
+		<finalName>accm</finalName>
+		<sourceDirectory>src/main/java</sourceDirectory>
+		<testSourceDirectory>src/test/java/</testSourceDirectory>
+		<filters>
+			<filter>src/main/resources/env/${env}/jdbc-pg-${env}.properties</filter>
+		</filters>
+		<resources>
+			<resource>
+				<filtering>true</filtering>
+				<directory>src/main/resources</directory>
+				<excludes>
+					<exclude>env/**</exclude>
+				</excludes>
+			</resource>
+		</resources>
 		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>2.7</version>
+				<configuration>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -280,6 +319,13 @@
 			<groupId>org.springframework.data</groupId>
 			<artifactId>spring-data-envers</artifactId>
 			<version>1.0.2.RELEASE</version>
+		</dependency>
+
+		<!-- http://mvnrepository.com/artifact/org.jasypt/jasypt -->
+		<dependency>
+			<groupId>org.jasypt</groupId>
+			<artifactId>jasypt</artifactId>
+			<version>1.9.2</version>
 		</dependency>
 
 

@@ -4,6 +4,9 @@ import javax.annotation.Resource;
 import javax.sql.DataSource;
 
 import org.apache.commons.dbcp2.BasicDataSource;
+import org.jasypt.properties.PropertyValueEncryptionUtils;
+import org.jasypt.util.text.StrongTextEncryptor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
@@ -12,8 +15,10 @@ import org.springframework.core.env.Environment;
 /**
  * Common Settings for DataSource
  * <ul>
- * <li>{@link Configuration} - defines this class as a Spring Configuration class</li>
- * <li>{@link PropertySource} - replaces &lt;context:property-placeholder/&gt;</li>
+ * <li>{@link Configuration} - defines this class as a Spring Configuration
+ * class</li>
+ * <li>{@link PropertySource} - replaces
+ * &lt;context:property-placeholder/&gt;</li>
  * <li>{@link Bean} - replaces &lt;bean/&gt;</li>
  * </ul>
  * 
@@ -39,6 +44,9 @@ public class DataSourceConfig {
     @Resource
     private Environment environment;
 
+    @Autowired
+    private StrongTextEncryptor encryptor;
+
     /**
      * Apache commons implementation of {@link DataSource}
      * 
@@ -46,27 +54,34 @@ public class DataSourceConfig {
      */
     @Bean
     public DataSource dataSource() {
-        BasicDataSource dataSource = new BasicDataSource();
+	BasicDataSource dataSource = new BasicDataSource();
 
-        dataSource.setDriverClassName(environment.getRequiredProperty(PROPERTY_NAME_DATABASE_DRIVER));
-        dataSource.setUrl(environment.getRequiredProperty(PROPERTY_NAME_DATABASE_URL));
-        dataSource.setUsername(environment.getRequiredProperty(PROPERTY_NAME_DATABASE_USERNAME));
-        dataSource.setPassword(environment.getRequiredProperty(PROPERTY_NAME_DATABASE_PASSWORD));
+	dataSource.setDriverClassName(environment.getRequiredProperty(PROPERTY_NAME_DATABASE_DRIVER));
+	dataSource.setUrl(environment.getRequiredProperty(PROPERTY_NAME_DATABASE_URL));
+	dataSource.setUsername(environment.getRequiredProperty(PROPERTY_NAME_DATABASE_USERNAME));
+	// dataSource.setPassword(environment.getRequiredProperty(PROPERTY_NAME_DATABASE_PASSWORD));
 
-        // POOLING
-        String initialSize = environment.getRequiredProperty(PROPERTY_NAME_DBCP_INITIAL_SIZE);
-        dataSource.setInitialSize(Integer.parseInt(initialSize));
+	String passwordPropertyValue = environment.getRequiredProperty(PROPERTY_NAME_DATABASE_PASSWORD);
+	if (PropertyValueEncryptionUtils.isEncryptedValue(passwordPropertyValue)) {
+	    dataSource.setPassword(PropertyValueEncryptionUtils.decrypt(passwordPropertyValue, encryptor));
+	} else {
+	    dataSource.setPassword(passwordPropertyValue);
+	}
 
-        String maxTotal = environment.getRequiredProperty(PROPERTY_NAME_DBCP_MAX_ACTIVE);
-        dataSource.setMaxTotal(Integer.parseInt(maxTotal));
+	// POOLING
+	String initialSize = environment.getRequiredProperty(PROPERTY_NAME_DBCP_INITIAL_SIZE);
+	dataSource.setInitialSize(Integer.parseInt(initialSize));
 
-        String maxIdle = environment.getRequiredProperty(PROPERTY_NAME_DBCP_MAX_IDLE);
-        dataSource.setMaxIdle(Integer.parseInt(maxIdle));
+	String maxTotal = environment.getRequiredProperty(PROPERTY_NAME_DBCP_MAX_ACTIVE);
+	dataSource.setMaxTotal(Integer.parseInt(maxTotal));
 
-        String minIdle = environment.getRequiredProperty(PROPERTY_NAME_DBCP_MIN_IDLE);
-        dataSource.setMinIdle(Integer.parseInt(minIdle));
+	String maxIdle = environment.getRequiredProperty(PROPERTY_NAME_DBCP_MAX_IDLE);
+	dataSource.setMaxIdle(Integer.parseInt(maxIdle));
 
-        return dataSource;
+	String minIdle = environment.getRequiredProperty(PROPERTY_NAME_DBCP_MIN_IDLE);
+	dataSource.setMinIdle(Integer.parseInt(minIdle));
+
+	return dataSource;
     }
 
 }
